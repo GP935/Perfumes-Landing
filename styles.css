@@ -1,0 +1,384 @@
+/* ============================================================
+   KAĒL — Maison de Parfum
+   Design system + layout
+   ============================================================ */
+
+/* ---- Tokens ------------------------------------------------ */
+:root{
+  /* surfaces — warm ivory / parchment */
+  --ivoire:   oklch(0.962 0.008 85);
+  --ivoire-2: oklch(0.932 0.011 84);
+  --ivoire-3: oklch(0.900 0.013 83);
+
+  /* ink — warm near-black */
+  --ink:      oklch(0.205 0.013 62);
+  --ink-soft: oklch(0.205 0.013 62 / 0.62);
+  --ink-faint:oklch(0.205 0.013 62 / 0.34);
+
+  /* noir surfaces (dark sections) */
+  --noir:     oklch(0.165 0.009 64);
+  --noir-2:   oklch(0.205 0.011 64);
+  --noir-3:   oklch(0.255 0.012 64);
+  --on-noir:      oklch(0.945 0.010 85);
+  --on-noir-soft: oklch(0.945 0.010 85 / 0.60);
+  --on-noir-faint:oklch(0.945 0.010 85 / 0.26);
+
+  /* accent — antique gold (tweakable) */
+  --accent: oklch(0.70 0.075 75);
+
+  /* derived: page surface + foreground (flips with theme) */
+  --bg:  var(--ivoire);
+  --fg:  var(--ink);
+  --fg-soft:  var(--ink-soft);
+  --fg-faint: var(--ink-faint);
+  --line: oklch(0.205 0.013 62 / 0.14);
+
+  /* fonts (tweakable) */
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Jost", system-ui, sans-serif;
+
+  --maxw: 1500px;
+  --gutter: clamp(1.25rem, 5vw, 6rem);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Noir ambiance — whole page inverts to dark luxe */
+body.theme-noir{
+  --bg: var(--noir);
+  --fg: var(--on-noir);
+  --fg-soft: var(--on-noir-soft);
+  --fg-faint: var(--on-noir-faint);
+  --line: oklch(0.945 0.010 85 / 0.16);
+  --ivoire: var(--noir);
+  --ivoire-2: var(--noir-2);
+  --ivoire-3: var(--noir-3);
+}
+
+/* ---- Reset ------------------------------------------------- */
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+body{
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--font-sans);
+  font-weight:300;
+  line-height:1.6;
+  font-size:clamp(1rem, 1.05vw, 1.12rem);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  transition:background .8s var(--ease), color .8s var(--ease);
+}
+img{ display:block; max-width:100%; }
+a{ color:inherit; text-decoration:none; }
+button{ font:inherit; color:inherit; background:none; border:none; cursor:pointer; }
+::selection{ background:var(--accent); color:var(--noir); }
+
+/* ---- Type primitives -------------------------------------- */
+.display{
+  font-family:var(--font-display);
+  font-weight:500;
+  line-height:0.92;
+  letter-spacing:-0.01em;
+  text-wrap:balance;
+}
+.label{
+  font-family:var(--font-sans);
+  font-weight:500;
+  font-size:0.7rem;
+  letter-spacing:0.34em;
+  text-transform:uppercase;
+  color:var(--fg-soft);
+}
+.label .dot{ color:var(--accent); }
+.serif{ font-family:var(--font-display); }
+em{ font-style:italic; }
+
+/* ---- Layout helpers --------------------------------------- */
+.wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gutter); }
+.section{ padding-block:clamp(6rem, 13vh, 12rem); position:relative; }
+.eyebrow{ display:flex; align-items:center; gap:0.8rem; margin-bottom:2.4rem; }
+.eyebrow::after{ content:""; height:1px; flex:1; background:var(--line); }
+
+/* ============================================================
+   Reveal animation
+   ============================================================ */
+.reveal{ opacity:0; transform:translateY(28px); transition:opacity 1.1s var(--ease), transform 1.1s var(--ease); }
+.reveal.in{ opacity:1; transform:none; }
+.reveal.d1{ transition-delay:.08s; }
+.reveal.d2{ transition-delay:.16s; }
+.reveal.d3{ transition-delay:.24s; }
+.reveal.d4{ transition-delay:.32s; }
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity:1; transform:none; transition:none; }
+  html{ scroll-behavior:auto; }
+}
+
+/* ============================================================
+   Navigation
+   ============================================================ */
+.nav{
+  position:fixed; inset:0 0 auto 0; z-index:60;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1.5rem var(--gutter);
+  mix-blend-mode:normal;
+  transition:background .5s var(--ease), padding .5s var(--ease), box-shadow .5s var(--ease);
+}
+.nav.scrolled{
+  background:color-mix(in oklch, var(--bg) 86%, transparent);
+  backdrop-filter:blur(14px) saturate(1.2);
+  padding-block:1.05rem;
+  box-shadow:0 1px 0 var(--line);
+}
+.nav.hero-mode{ color:var(--on-noir); }
+.nav__brand{
+  font-family:var(--font-display); font-weight:600;
+  font-size:1.55rem; letter-spacing:0.16em;
+}
+.nav__links{ display:flex; gap:2.6rem; align-items:center; }
+.nav__links a{
+  font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; font-weight:500;
+  position:relative; padding-block:.4rem;
+}
+.nav__links a::after{
+  content:""; position:absolute; left:0; bottom:0; height:1px; width:0;
+  background:currentColor; transition:width .45s var(--ease);
+}
+.nav__links a:hover::after{ width:100%; }
+.nav__cta{
+  font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; font-weight:500;
+  white-space:nowrap;
+  border:1px solid currentColor; border-radius:100px; padding:.6rem 1.3rem;
+  opacity:.85; transition:opacity .35s, background .35s, color .35s;
+}
+.nav__cta:hover{ opacity:1; background:currentColor; }
+.nav__cta:hover span{ color:var(--bg); }
+.nav__menu{ display:none; font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; }
+
+/* page index counter (right rail) */
+.indexer{
+  position:fixed; right:var(--gutter); bottom:2.2rem; z-index:55;
+  display:flex; align-items:baseline; gap:.5rem;
+  font-family:var(--font-display); pointer-events:none;
+  mix-blend-mode:difference; color:#fff;
+}
+.indexer .cur{ font-size:2.6rem; font-weight:500; line-height:1; }
+.indexer .sep{ font-size:1rem; opacity:.6; }
+.indexer .tot{ font-size:1rem; opacity:.6; }
+.indexer .name{
+  writing-mode:vertical-rl; font-family:var(--font-sans); font-size:0.62rem;
+  letter-spacing:0.28em; text-transform:uppercase; margin-left:.6rem; opacity:.7;
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero{
+  position:relative; min-height:100svh; display:flex; align-items:flex-end;
+  background:var(--noir); color:var(--on-noir); overflow:hidden;
+  padding-bottom:clamp(2.5rem, 7vh, 6rem);
+}
+.hero__media{ position:absolute; inset:0; z-index:0; }
+.hero__media image-slot{ width:100%; height:100%; }
+.hero__media::after{ /* cinematic vignette */
+  content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:
+    linear-gradient(to top, oklch(0.12 0.01 64 / 0.92) 0%, transparent 42%),
+    linear-gradient(to bottom, oklch(0.12 0.01 64 / 0.55) 0%, transparent 30%),
+    radial-gradient(120% 80% at 80% 10%, transparent 40%, oklch(0.12 0.01 64 / 0.5) 100%);
+}
+.hero__grain{ position:absolute; inset:0; z-index:3; opacity:.5; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;
+}
+.hero__inner{ position:relative; z-index:5; width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gutter); }
+.hero__meta{ display:flex; align-items:center; gap:0.8rem; margin-bottom:1.8rem; }
+.hero__meta .label{ color:var(--on-noir-soft); }
+.hero__title{ font-size:clamp(4.5rem, 17vw, 16rem); letter-spacing:0.02em; margin-bottom:0; }
+.hero__row{ display:flex; align-items:flex-end; justify-content:space-between; gap:3rem; flex-wrap:wrap; }
+.hero__lede{
+  max-width:34ch; font-size:clamp(1.05rem, 1.5vw, 1.35rem); color:var(--on-noir-soft);
+  font-weight:300; line-height:1.55;
+}
+.hero__lede em{ color:var(--on-noir); font-family:var(--font-display); font-size:1.15em; font-style:italic; }
+.hero__cta{
+  display:inline-flex; align-items:center; gap:.9rem; margin-top:1.8rem;
+  font-size:0.74rem; letter-spacing:0.24em; text-transform:uppercase; font-weight:500;
+  color:var(--on-noir);
+}
+.hero__cta .arrow{ width:46px; height:46px; border-radius:50%; border:1px solid var(--on-noir-faint);
+  display:grid; place-items:center; transition:background .4s var(--ease), color .4s, border-color .4s; }
+.hero__cta:hover .arrow{ background:var(--accent); border-color:var(--accent); color:var(--noir); transform:translateX(2px); }
+.hero__cta .arrow svg{ width:18px; height:18px; }
+.scrollcue{ position:absolute; left:50%; bottom:2rem; transform:translateX(-50%); z-index:5;
+  display:flex; flex-direction:column; align-items:center; gap:.7rem; color:var(--on-noir-soft); }
+.scrollcue .label{ color:var(--on-noir-soft); font-size:0.6rem; }
+.scrollcue .bar{ width:1px; height:46px; background:linear-gradient(var(--on-noir-faint), transparent); position:relative; overflow:hidden; }
+.scrollcue .bar::after{ content:""; position:absolute; top:-50%; left:0; width:100%; height:50%; background:var(--accent); animation:cue 2.4s var(--ease) infinite; }
+@keyframes cue{ 0%{ top:-60%; } 60%,100%{ top:110%; } }
+
+/* ============================================================
+   Manifesto / mot du parfumeur
+   ============================================================ */
+.manifesto{ padding-block:clamp(7rem,16vh,15rem); }
+.manifesto__grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2.4fr); gap:clamp(2rem,6vw,7rem); align-items:start; }
+.manifesto__side .label{ display:block; line-height:1.9; }
+.manifesto__side .rule{ width:42px; height:1px; background:var(--accent); margin:1.2rem 0; }
+.manifesto__quote{
+  font-family:var(--font-display); font-weight:500;
+  font-size:clamp(1.9rem, 4.1vw, 3.7rem); line-height:1.12; letter-spacing:-0.01em;
+  text-wrap:balance;
+}
+.manifesto__quote em{ color:var(--accent); }
+
+/* marquee of notes */
+.marquee{ border-block:1px solid var(--line); padding-block:1.5rem; overflow:hidden; white-space:nowrap; }
+.marquee__track{ display:inline-flex; gap:2.6rem; animation:slide 38s linear infinite; will-change:transform; }
+.marquee:hover .marquee__track{ animation-play-state:paused; }
+.marquee__track span{ font-family:var(--font-display); font-size:clamp(1.6rem,3vw,2.6rem); font-style:italic; color:var(--fg-soft); display:inline-flex; align-items:center; gap:2.6rem; }
+.marquee__track span::after{ content:"✦"; font-size:0.7em; color:var(--accent); font-style:normal; }
+@keyframes slide{ to{ transform:translateX(-50%); } }
+
+/* ============================================================
+   Collection
+   ============================================================ */
+.collection{ background:var(--ivoire-2); transition:background .8s var(--ease); }
+.collection__head{ display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; flex-wrap:wrap; margin-bottom:clamp(3rem,7vh,6rem); }
+.collection__head h2{ font-size:clamp(2.8rem,7vw,6rem); }
+.collection__head p{ max-width:30ch; color:var(--fg-soft); }
+.collection__head .num-big{ font-family:var(--font-display); font-style:italic; color:var(--accent); }
+
+.fragrance{
+  display:grid; grid-template-columns:1fr 1.05fr; gap:clamp(1.5rem,5vw,5rem);
+  align-items:center; padding-block:clamp(3rem,7vh,6rem);
+  border-top:1px solid var(--line);
+}
+.fragrance:last-child{ border-bottom:1px solid var(--line); }
+.fragrance:nth-child(even){ grid-template-columns:1.05fr 1fr; }
+.fragrance:nth-child(even) .fragrance__media{ order:2; }
+.fragrance__media{ position:relative; aspect-ratio:4/5; }
+.fragrance__media image-slot{ width:100%; height:100%; }
+.fragrance__tag{ position:absolute; top:1.1rem; left:1.1rem; z-index:4; background:color-mix(in oklch,var(--bg) 70%, transparent); backdrop-filter:blur(6px); padding:.45rem .85rem; }
+.fragrance__edition{ color:var(--accent); }
+.fragrance__num{ font-family:var(--font-display); font-size:clamp(2rem,4vw,3.2rem); font-style:italic; color:var(--fg-faint); line-height:1; margin-bottom:1rem; }
+.fragrance__name{ font-family:var(--font-display); font-weight:500; font-size:clamp(2.6rem,6vw,4.6rem); line-height:0.98; margin-bottom:1.5rem; }
+.fragrance__notes{ display:flex; flex-wrap:wrap; gap:.6rem; margin-bottom:1.6rem; }
+.fragrance__notes span{ font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; border:1px solid var(--line); border-radius:100px; padding:.4rem .9rem; color:var(--fg-soft); }
+.fragrance__desc{ max-width:42ch; color:var(--fg-soft); margin-bottom:2rem; font-size:1.08rem; }
+.fragrance__foot{ display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap; }
+.fragrance__price{ font-family:var(--font-display); font-size:1.5rem; }
+.fragrance__price small{ font-family:var(--font-sans); font-size:0.72rem; letter-spacing:0.16em; color:var(--fg-faint); margin-left:.5rem; }
+.linkarrow{ display:inline-flex; align-items:center; gap:.6rem; font-size:0.74rem; letter-spacing:0.22em; text-transform:uppercase; font-weight:500; position:relative; }
+.linkarrow .ln{ width:0; height:1px; background:var(--accent); transition:width .45s var(--ease); }
+.linkarrow:hover .ln{ width:28px; }
+.linkarrow:hover{ color:var(--accent); }
+
+/* fragrance canvas */
+.fragrance__canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+
+/* image-slot empty-state styling (shadow parts) */
+image-slot{ display:block; }
+image-slot::part(frame){ background:var(--ivoire-3); }
+image-slot::part(ring){ border-color:var(--line); }
+image-slot::part(empty){ color:var(--fg-faint); }
+.theme-noir image-slot::part(frame){ background:var(--noir-2); }
+.hero__media image-slot::part(frame),
+.bespoke__media image-slot::part(frame){ background:var(--noir-2); }
+.hero__media image-slot::part(empty),
+.bespoke__media image-slot::part(empty){ color:var(--on-noir-soft); }
+.hero__media image-slot::part(ring),
+.bespoke__media image-slot::part(ring){ border-color:var(--on-noir-faint); }
+
+/* ============================================================
+   Sur-mesure / bespoke
+   ============================================================ */
+.bespoke{ background:var(--noir); color:var(--on-noir); position:relative; overflow:hidden; }
+.bespoke__grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:clamp(2rem,6vw,6rem); align-items:center; }
+.bespoke .label{ color:var(--on-noir-soft); }
+.bespoke h2{ font-family:var(--font-display); font-weight:500; font-size:clamp(2.6rem,6.2vw,5.4rem); line-height:1.04; margin:2rem 0 2.4rem; }
+.bespoke h2 em{ color:var(--accent); }
+.bespoke p{ color:var(--on-noir-soft); max-width:44ch; margin-bottom:2.4rem; }
+.btn-ghost{
+  display:inline-flex; align-items:center; gap:.9rem; border:1px solid var(--on-noir-faint);
+  border-radius:100px; padding:1rem 1.8rem; font-size:0.74rem; letter-spacing:0.22em;
+  text-transform:uppercase; font-weight:500; transition:background .4s var(--ease), color .4s, border-color .4s;
+}
+.btn-ghost:hover{ background:var(--accent); border-color:var(--accent); color:var(--noir); }
+.bespoke__media{ position:relative; aspect-ratio:3/4; }
+.bespoke__media image-slot{ width:100%; height:100%; }
+
+/* ============================================================
+   Olfactory pyramid
+   ============================================================ */
+.pyramid__head{ text-align:center; margin-bottom:clamp(3.5rem,8vh,7rem); }
+.pyramid__head h2{ font-size:clamp(2.6rem,6.5vw,5.6rem); margin-top:1.4rem; }
+.pyramid__rows{ max-width:980px; margin-inline:auto; }
+.pyr{
+  display:grid; grid-template-columns:auto 1fr auto; gap:clamp(1rem,3vw,3rem); align-items:baseline;
+  padding-block:clamp(1.8rem,4vh,3rem); border-top:1px solid var(--line);
+  transition:padding-left .5s var(--ease);
+}
+.pyr:last-child{ border-bottom:1px solid var(--line); }
+.pyr:hover{ padding-left:clamp(0.5rem,2vw,2rem); }
+.pyr__idx{ font-family:var(--font-display); font-style:italic; color:var(--accent); font-size:1.3rem; }
+.pyr__name{ font-family:var(--font-display); font-size:clamp(1.7rem,3.6vw,2.8rem); font-weight:500; }
+.pyr__name small{ display:block; font-family:var(--font-sans); font-size:0.66rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--fg-faint); margin-top:.4rem; }
+.pyr__notes{ text-align:right; color:var(--fg-soft); max-width:34ch; font-size:1.05rem; }
+
+/* ============================================================
+   Newsletter
+   ============================================================ */
+.news{ background:var(--ivoire-2); transition:background .8s var(--ease); }
+.news__inner{ max-width:760px; margin-inline:auto; text-align:center; }
+.news h2{ font-family:var(--font-display); font-weight:500; font-size:clamp(2.2rem,5vw,4rem); line-height:1.04; margin:1.4rem 0 2.6rem; }
+.news__form{ display:flex; gap:1rem; border-bottom:1px solid var(--fg); padding-bottom:1rem; align-items:center; }
+.news__form input{
+  flex:1; background:none; border:none; outline:none; color:var(--fg);
+  font-family:var(--font-display); font-size:clamp(1.2rem,2.5vw,1.8rem); font-style:italic;
+}
+.news__form input::placeholder{ color:var(--fg-faint); }
+.news__form button{ width:54px; height:54px; border-radius:50%; background:var(--accent); color:var(--noir); display:grid; place-items:center; flex:none; transition:transform .4s var(--ease); }
+.news__form button:hover{ transform:translateX(4px); }
+.news__ok{ height:0; overflow:hidden; opacity:0; transition:opacity .6s, height .6s; font-family:var(--font-display); font-style:italic; font-size:1.3rem; color:var(--accent); }
+.news.done .news__form{ opacity:.25; pointer-events:none; }
+.news.done .news__ok{ height:auto; opacity:1; margin-top:1.6rem; }
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.footer{ background:var(--noir); color:var(--on-noir); padding-block:clamp(4rem,9vh,7rem) 2.5rem; }
+.footer__top{ display:grid; grid-template-columns:1.6fr 1fr 1fr; gap:3rem; padding-bottom:clamp(4rem,9vh,7rem); border-bottom:1px solid var(--on-noir-faint); }
+.footer__brand{ font-family:var(--font-display); font-size:clamp(3rem,9vw,7rem); font-weight:500; letter-spacing:0.04em; line-height:1; }
+.footer__brand small{ display:block; font-family:var(--font-sans); font-size:0.66rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--on-noir-soft); margin-top:1.2rem; }
+.footer__col h4{ font-family:var(--font-sans); font-size:0.68rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--on-noir-soft); margin-bottom:1.6rem; font-weight:500; }
+.footer__col a{ display:block; padding-block:.5rem; color:var(--on-noir); opacity:.82; transition:opacity .3s, padding-left .35s var(--ease); font-size:1.05rem; }
+.footer__col a:hover{ opacity:1; padding-left:.5rem; color:var(--accent); }
+.footer__bottom{ display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; padding-top:2.5rem; font-size:0.7rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--on-noir-soft); }
+
+/* ============================================================
+   Tweaks mount
+   ============================================================ */
+#tweaks-root{ position:fixed; z-index:200; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 1024px){
+  .nav__links{ display:none; }
+  .nav__menu{ display:block; }
+  .manifesto__grid{ grid-template-columns:1fr; gap:2.5rem; }
+  .bespoke__grid{ grid-template-columns:1fr; }
+  .bespoke__media{ aspect-ratio:16/10; max-height:60vh; }
+  .footer__top{ grid-template-columns:1fr 1fr; }
+  .footer__brand{ grid-column:1 / -1; }
+}
+@media (max-width: 720px){
+  .fragrance, .fragrance:nth-child(even){ grid-template-columns:1fr; gap:1.8rem; }
+  .fragrance:nth-child(even) .fragrance__media{ order:0; }
+  .fragrance__media{ aspect-ratio:4/3; }
+  .hero__row{ gap:1.5rem; }
+  .pyr{ grid-template-columns:auto 1fr; }
+  .pyr__notes{ grid-column:1 / -1; text-align:left; margin-top:.6rem; }
+  .footer__top{ grid-template-columns:1fr; gap:2.5rem; }
+  .indexer{ display:none; }
+  .news__nav{ display:none; }
+}
