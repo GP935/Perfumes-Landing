@@ -16,10 +16,10 @@
                  false → progreso arranca cuando section-top = viewport-top
                          (útil para el hero que siempre inicia en pantalla). */
   var CONFIGS = [
-    { sel: '.manifesto',          folder: 'flores y tinta fps', frames: 183, veil: true,  fromEntry: true  },
-    { sel: '[data-fr="noir"]',    folder: 'noir smoke fps',    frames: 183, veil: true,  fromEntry: true  },
-    { sel: '[data-fr="chaleur"]', folder: 'ambar calido fps',  frames: 183, veil: true,  fromEntry: true  },
-    { sel: '[data-fr="blanc"]',   folder: 'white lilac fps',   frames: 183, veil: true,  fromEntry: true  },
+    { sel: '.manifesto',          folder: 'flores y tinta fps', frames: 183, veil: true,  fromEntry: true,  video: 'flores y tinta.mp4' },
+    { sel: '[data-fr="noir"]',    folder: 'noir smoke fps',    frames: 183, veil: true,  fromEntry: true,  video: 'noir smoke.mp4'     },
+    { sel: '[data-fr="chaleur"]', folder: 'ambar calido fps',  frames: 183, veil: true,  fromEntry: true,  video: 'ambar calido.mp4'   },
+    { sel: '[data-fr="blanc"]',   folder: 'white lilac fps',   frames: 183, veil: true,  fromEntry: true,  video: 'white lilac.mp4'    },
   ];
 
   /* ── helpers ────────────────────────────────────────────── */
@@ -43,7 +43,7 @@
     img.setAttribute('aria-hidden', 'true');
     this.display = img;
 
-    this._inject(el, img, cfg.veil);
+    this._inject(el, img, cfg.veil, cfg.video);
 
     /* arranca la precarga cuando la sección se acerca al viewport */
     var self = this;
@@ -57,7 +57,7 @@
     }
   }
 
-  Reel.prototype._inject = function (el, img, addVeil) {
+  Reel.prototype._inject = function (el, img, addVeil, videoSrc) {
     /* hero: directo en hero__bg */
     var bg = el.querySelector('.hero__bg');
     if (bg) {
@@ -69,10 +69,25 @@
     var ref   = stage || el;
     ref.insertBefore(img, ref.firstChild);
 
+    /* video para móvil — se muestra solo en ≤1024 px vía CSS */
+    var lastEl = img;
+    if (videoSrc) {
+      var vid = document.createElement('video');
+      vid.className  = 'reel-video';
+      vid.src        = BASE + encodeURIComponent(videoSrc);
+      vid.autoplay   = true;
+      vid.loop       = true;
+      vid.muted      = true;
+      vid.setAttribute('playsinline', '');
+      vid.setAttribute('aria-hidden', 'true');
+      ref.insertBefore(vid, img.nextSibling);
+      lastEl = vid;
+    }
+
     if (addVeil && stage) {
       var v = document.createElement('div');
       v.className = 'reel-veil';
-      stage.insertBefore(v, img.nextSibling);
+      stage.insertBefore(v, lastEl.nextSibling);
     }
   };
 
