@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KAĒL — Perfume de autor · La Experiencia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="experiencia.css" />
+</head>
+<body data-theme="dark">
+
+<!-- ============ LOADER ============ -->
+<div id="loader" aria-label="Cargando experiencia">
+  <div class="loader__inner">
+    <p class="loader__brand">KAĒL</p>
+    <div class="loader__track"><div class="loader__fill"></div></div>
+    <p class="loader__sub label">Perfume de autor · Grasse, Francia</p>
+  </div>
+</div>
+
+<div class="glow"></div>
+<div class="grain"></div>
+<div class="cursor-ring"></div>
+<div class="cursor-dot"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a href="#top" class="nav__brand">KAĒL</a>
+  <nav class="nav__links">
+    <a href="#cap-noir">Colección</a>
+    <a href="#olfato">Olfato</a>
+    <a href="#casa">Casa</a>
+    <a href="#cita">Contacto</a>
+  </nav>
+  <a href="#cita" class="nav__cta">Reservar cita</a>
+  <button class="nav__menu" aria-label="Menú">Menú</button>
+</header>
+
+<!-- ============ RAIL ============ -->
+<aside class="rail" aria-hidden="true">
+  <div class="rail__item active" data-for="Apertura"><span class="rail__name">Apertura</span><span class="rail__line"></span><span class="rail__num">01</span></div>
+  <div class="rail__item" data-for="Manifiesto"><span class="rail__name">Manifiesto</span><span class="rail__line"></span><span class="rail__num">02</span></div>
+  <div class="rail__item" data-for="Noir Absolu"><span class="rail__name">Noir Absolu</span><span class="rail__line"></span><span class="rail__num">03</span></div>
+  <div class="rail__item" data-for="Chaleur"><span class="rail__name">Chaleur</span><span class="rail__line"></span><span class="rail__num">04</span></div>
+  <div class="rail__item" data-for="Voile Blanc"><span class="rail__name">Voile Blanc</span><span class="rail__line"></span><span class="rail__num">05</span></div>
+  <div class="rail__item" data-for="Olfato"><span class="rail__name">Olfato</span><span class="rail__line"></span><span class="rail__num">06</span></div>
+  <div class="rail__item" data-for="Cita"><span class="rail__name">Cita</span><span class="rail__line"></span><span class="rail__num">07</span></div>
+</aside>
+
+<!-- ============ ACTO 0 · APERTURA ============ -->
+<section class="scene hero" id="top" data-scene data-name="Apertura" data-theme="dark" data-screen-label="Apertura">
+  <div class="stage">
+    <div class="hero__bg">
+      <video class="reel-frame" src="media/hero section.mp4" autoplay loop muted playsinline></video>
+    </div>
+    <div class="hero__veil"></div>
+    <div class="wrap hero__inner">
+      <div class="hero__meta">
+        <span class="label">Perfume de autor</span>
+        <span class="label" style="color:var(--accent)">·</span>
+        <span class="label">Desde 1998</span>
+      </div>
+      <h1 class="display hero__title">KAĒL</h1>
+      <div class="hero__row">
+        <p class="hero__lede">El arte de la <em>memoria olfativa</em>. Composiciones raras, hechas a mano para quienes nunca se conforman con lo evidente.</p>
+        <a href="#cap-noir" class="hero__cta">
+          <span>Comenzar el recorrido</span>
+          <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
+        </a>
+      </div>
+    </div>
+    <div class="scrollcue">
+      <span class="label">Desplázate</span>
+      <span class="bar"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACTO I · MANIFIESTO ============ -->
+<section class="scene manifesto" data-scene data-name="Manifiesto" data-theme="dark" data-screen-label="Manifiesto">
+  <div class="stage">
+    <div class="wrap">
+      <blockquote class="manifesto__quote" data-words>Un perfume no es un accesorio. Es una <em>firma invisible</em>, un rastro que dejas mucho después de haberte ido.</blockquote>
+      <div class="manifesto__sig"><span class="label">El perfumista — Grasse, Francia</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACTO II · NOIR ABSOLU ============ -->
+<section class="scene chapter" id="cap-noir" data-scene data-chapter data-fr="noir" data-name="Noir Absolu" data-theme="dark" data-screen-label="Noir Absolu">
+  <div class="stage">
+    <div class="chapter__roman">I</div>
+    <div class="wrap">
+      <div class="chapter__grid">
+        <div class="chapter__media">
+          <div class="chapter__tag label"><span class="ed">Nº 01</span>&nbsp; Edición Noir</div>
+          <image-slot id="frag-noir" shape="rect" fit="cover" placeholder="Flacon — Noir Absolu"></image-slot>
+        </div>
+        <div class="chapter__body">
+          <span class="chapter__edition label"><span class="dot">✦</span>&nbsp; Capítulo I · Lo nocturno</span>
+          <h2 class="chapter__name">Noir Absolu</h2>
+          <div class="chapter__notes">
+            <span class="note" data-desc="Un cuero oscuro, casi animal.">Cuero ahumado</span>
+            <span class="note" data-desc="Madera preciosa, densa y resinosa.">Oud</span>
+            <span class="note" data-desc="Una chispa especiada en la apertura.">Cardamomo</span>
+          </div>
+          <p class="chapter__reveal-line">Pasa el cursor por las notas para explorarlas</p>
+          <p class="chapter__desc">Una fragancia nocturna y resinosa. El cuero se enrosca alrededor del oud como una sombra que no se olvida.</p>
+          <div class="chapter__foot">
+            <div class="chapter__price">€ 280 <small>100 ML</small></div>
+            <a href="#cita" class="btn btn--solid"><span>Adquirir</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACTO III · CHALEUR ============ -->
+<section class="scene chapter" id="cap-chaleur" data-scene data-chapter data-fr="chaleur" data-name="Chaleur" data-theme="dark" data-screen-label="Chaleur">
+  <div class="stage">
+    <div class="chapter__roman">II</div>
+    <div class="wrap">
+      <div class="chapter__grid">
+        <div class="chapter__media">
+          <div class="chapter__tag label"><span class="ed">Nº 02</span>&nbsp; Edición Ambre</div>
+          <image-slot id="frag-ambre" shape="rect" fit="cover" placeholder="Flacon — Chaleur"></image-slot>
+        </div>
+        <div class="chapter__body">
+          <span class="chapter__edition label"><span class="dot">✦</span>&nbsp; Capítulo II · Lo cálido</span>
+          <h2 class="chapter__name">Chaleur</h2>
+          <div class="chapter__notes">
+            <span class="note" data-desc="Resina dorada, dulce y envolvente.">Ámbar</span>
+            <span class="note" data-desc="Cremosa, gourmand, reconfortante.">Vainilla</span>
+            <span class="note" data-desc="Una madera lechosa que abraza la piel.">Sándalo</span>
+          </div>
+          <p class="chapter__reveal-line">Pasa el cursor por las notas para explorarlas</p>
+          <p class="chapter__desc">La dulzura de una piel al atardecer. Ámbar envolvente, adictivo — un recuerdo de verano que no se apaga.</p>
+          <div class="chapter__foot">
+            <div class="chapter__price">€ 260 <small>100 ML</small></div>
+            <a href="#cita" class="btn btn--solid"><span>Adquirir</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACTO IV · VOILE BLANC ============ -->
+<section class="scene chapter" id="cap-blanc" data-scene data-chapter data-fr="blanc" data-name="Voile Blanc" data-theme="light" data-screen-label="Voile Blanc">
+  <div class="stage">
+    <div class="chapter__roman">III</div>
+    <div class="wrap">
+      <div class="chapter__grid">
+        <div class="chapter__media">
+          <div class="chapter__tag label"><span class="ed">Nº 03</span>&nbsp; Edición Blanche</div>
+          <image-slot id="frag-blanc" shape="rect" fit="cover" placeholder="Flacon — Voile Blanc"></image-slot>
+        </div>
+        <div class="chapter__body">
+          <span class="chapter__edition label"><span class="dot">✦</span>&nbsp; Capítulo III · Lo luminoso</span>
+          <h2 class="chapter__name">Voile Blanc</h2>
+          <div class="chapter__notes">
+            <span class="note" data-desc="Flor de azahar, fresca y solar.">Neroli</span>
+            <span class="note" data-desc="Una estela limpia, segunda piel.">Musgo blanco</span>
+            <span class="note" data-desc="Polvoroso, noble, ligeramente frío.">Iris</span>
+          </div>
+          <p class="chapter__reveal-line">Pasa el cursor por las notas para explorarlas</p>
+          <p class="chapter__desc">Luminosa y aérea. El neroli roza la piel, el musgo blanco la prolonga — una transparencia casi irreal.</p>
+          <div class="chapter__foot">
+            <div class="chapter__price">€ 240 <small>100 ML</small></div>
+            <a href="#cita" class="btn btn--solid"><span>Adquirir</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OLFATO · PIRÁMIDE ============ -->
+<section class="scene pyramid" id="olfato" data-scene data-name="Olfato" data-theme="dark" data-screen-label="Olfato">
+  <div class="wrap">
+    <div class="pyramid__head">
+      <span class="label">La pirámide olfativa</span>
+      <h2 class="display">Tres tiempos,<br />una misma emoción.</h2>
+    </div>
+    <div class="pyr">
+      <div class="pyr__idx">I</div>
+      <div class="pyr__name">Notas de salida <small>El primer aliento</small></div>
+      <div class="pyr__notes">Bergamota de Calabria, pimienta rosa, mandarina verde</div>
+    </div>
+    <div class="pyr">
+      <div class="pyr__idx">II</div>
+      <div class="pyr__name">Notas de corazón <small>El carácter</small></div>
+      <div class="pyr__notes">Iris de Florencia, rosa de mayo, neroli</div>
+    </div>
+    <div class="pyr">
+      <div class="pyr__idx">III</div>
+      <div class="pyr__name">Notas de fondo <small>La memoria</small></div>
+      <div class="pyr__notes">Oud, ámbar gris, musgo blanco, sándalo</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CITA · CTA FINAL ============ -->
+<section class="scene finale" id="cita" data-scene data-name="Cita" data-theme="light" data-screen-label="Cita">
+  <div class="finale__ring"></div>
+  <div class="wrap">
+    <div class="finale__inner">
+      <span class="label">A medida</span>
+      <h2 class="display">Compón tu <em>propia firma</em>.</h2>
+      <p>Una cita privada con nuestro perfumista, en Grasse o a distancia. Traducimos un recuerdo, un lugar, una persona — en una fragancia que solo te pertenecerá a ti.</p>
+      <div class="finale__btns">
+        <a href="#" class="btn btn--solid"><span>Reservar cita</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#" class="btn btn--ghost"><span>Contactar</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" id="casa">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">KAĒL<small>Perfume de autor · Grasse, Francia</small></div>
+      <div class="footer__col">
+        <h4>Casa</h4>
+        <a href="#">Nuestra historia</a>
+        <a href="#">El perfumista</a>
+        <a href="#">Artesanía</a>
+        <a href="#">Tiendas</a>
+      </div>
+      <div class="footer__col">
+        <h4>Seguir</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Pinterest</a>
+        <a href="#">Diario</a>
+        <a href="#">Prensa</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Maison Kaēl — Grasse</span>
+      <span>Demostración · Portafolio</span>
+    </div>
+  </div>
+</footer>
+
+<div id="tweaks-root"></div>
+
+<script src="image-slot.js"></script>
+<script src="experiencia.js"></script>
+<script src="scroll-reel.js"></script>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="tweaks-exp.jsx"></script>
+
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#16140f"/><text x="50" y="60" font-family="Georgia,serif" font-size="38" fill="#c9a86a" text-anchor="middle">K</text></svg>
+</template>
+
+</body>
+</html>
